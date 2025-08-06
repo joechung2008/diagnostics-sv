@@ -11,11 +11,11 @@
 
   let { stageDefinition }: StageDefinitionProps = $props();
 
-  const items: KeyValuePair<string[]>[] = Object.entries(stageDefinition).map(
-    ([key, value]) => ({
+  const items: KeyValuePair<string[]>[] = $derived.by(() =>
+    Object.entries(stageDefinition).map(([key, value]) => ({
       key,
       value,
-    })
+    }))
   );
 </script>
 

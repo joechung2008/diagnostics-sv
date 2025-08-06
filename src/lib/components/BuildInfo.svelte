@@ -10,7 +10,9 @@
 
   let { buildVersion }: BuildInfoProps = $props();
 
-  const items = [{ name: "Build Version", value: buildVersion }];
+  const items = $derived.by(() => [
+    { name: "Build Version", value: buildVersion },
+  ]);
 </script>
 
 <Table aria-label="Build Info">

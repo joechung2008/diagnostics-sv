@@ -17,7 +17,7 @@
     uptime,
   }: ServerInfoProps = $props();
 
-  const items = [
+  const items = $derived.by(() => [
     { name: "Hostname", value: hostname },
     { name: "Uptime", value: uptime },
     { name: "Server ID", value: serverId },
@@ -27,7 +27,7 @@
       name: "Extension Sync | Total Sync All Count",
       value: extensionSync.totalSyncAllCount,
     },
-  ];
+  ]);
 </script>
 
 <Table aria-label="Server Info">

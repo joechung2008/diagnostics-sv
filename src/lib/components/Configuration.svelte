@@ -11,11 +11,11 @@
 
   let { config }: ConfigurationProps = $props();
 
-  const items: KeyValuePair<string>[] = Object.entries(config).map(
-    ([key, value]) => ({
+  const items: KeyValuePair<string>[] = $derived.by(() =>
+    Object.entries(config).map(([key, value]) => ({
       key,
       value,
-    })
+    }))
   );
 </script>
 
