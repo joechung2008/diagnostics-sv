@@ -1,0 +1,182 @@
+<script lang="ts">
+  import { isExtensionInfo } from "$lib/utils";
+  import {
+    DarkMode,
+    Dropdown,
+    DropdownItem,
+    Navbar,
+    NavLi,
+    NavUl,
+    TabItem,
+    Tabs,
+  } from "flowbite-svelte";
+  import { ChevronDownOutline } from "flowbite-svelte-icons";
+  import BuildInfo from "./BuildInfo.svelte";
+  import Extension from "./Extension.svelte";
+  import Extensions from "./Extensions.svelte";
+  import ServerInfo from "./ServerInfo.svelte";
+  import { onMount } from "svelte";
+
+  enum Environment {
+    Public = "https://hosting.portal.azure.net/api/diagnostics",
+    Fairfax = "https://hosting.azureportal.usgovcloudapi.net/api/diagnostics",
+    Mooncake = "https://hosting.azureportal.chinacloudapi.cn/api/diagnostics",
+  }
+
+  let diagnostics = $state<Diagnostics>();
+  let extension = $state<ExtensionInfo>();
+  let environment = $state(Environment.Public);
+  let isOpen = $state(false);
+  let selectedTab = $state("extensions");
+
+  const extensions = $derived.by(() => diagnostics?.extensions ?? {});
+
+  const environmentName = $derived.by(() => {
+    switch (environment) {
+      case Environment.Public:
+        return "Public Cloud";
+      case Environment.Fairfax:
+        return "Fairfax";
+      case Environment.Mooncake:
+        return "Mooncake";
+      default:
+        return "Select environment";
+    }
+  });
+
+  const showPaasServerless = $derived.by(() =>
+    isExtensionInfo(extensions["paasserverless"])
+  );
+
+  const environments = $derived.by(() => [
+    {
+      key: "public",
+      text: "Public Cloud",
+      selected: environment === Environment.Public,
+      onClick: () => {
+        environment = Environment.Public;
+        extension = undefined;
+        isOpen = false;
+        fetchDiagnostics();
+      },
+    },
+    {
+      key: "fairfax",
+      text: "Fairfax",
+      selected: environment === Environment.Fairfax,
+      onClick: () => {
+        environment = Environment.Fairfax;
+        extension = undefined;
+        isOpen = false;
+        fetchDiagnostics();
+      },
+    },
+    {
+      key: "mooncake",
+      text: "Mooncake",
+      selected: environment === Environment.Mooncake,
+      onClick: () => {
+        environment = Environment.Mooncake;
+        extension = undefined;
+        isOpen = false;
+        fetchDiagnostics();
+      },
+    },
+  ]);
+
+  async function fetchDiagnostics() {
+    const response = await fetch(environment);
+    diagnostics = await response.json();
+  }
+
+  onMount(() => {
+    fetchDiagnostics();
+  });
+
+  function onLinkClick(item?: KeyedNavLink) {
+    if (item) {
+      const ext = extensions[item.key];
+      if (isExtensionInfo(ext)) {
+        extension = ext;
+      }
+    }
+  }
+
+  function selectTab(tab: string) {
+    selectedTab = tab;
+  }
+</script>
+
+{#if diagnostics}
+  <Navbar>
+    <NavUl>
+      <NavLi class="cursor-pointer">
+        {environmentName}<ChevronDownOutline class="inline" />
+      </NavLi>
+      <Dropdown bind:isOpen simple>
+        {#each environments as env (env.key)}
+          <DropdownItem onclick={env.onClick}>
+            {env.text}
+          </DropdownItem>
+        {/each}
+      </Dropdown>
+      {#if showPaasServerless}
+        <NavLi
+          class="cursor-pointer"
+          onclick={() => {
+            const paasserverless = extensions["paasserverless"];
+            if (isExtensionInfo(paasserverless)) {
+              extension = paasserverless;
+            }
+          }}
+        >
+          paasserverless
+        </NavLi>
+      {/if}
+      <NavLi
+        class="cursor-pointer"
+        onclick={() => {
+          const websites = extensions["websites"];
+          if (isExtensionInfo(websites)) {
+            extension = websites;
+          }
+        }}
+      >
+        websites
+      </NavLi>
+    </NavUl>
+    <div class="md-order-2 flex">
+      <DarkMode />
+    </div>
+  </Navbar>
+  <Tabs>
+    <TabItem
+      open={selectedTab === "extensions"}
+      title="Extensions"
+      onclick={() => selectTab("extensions")}
+    >
+      <div class="flex flex-row gap-4">
+        <Extensions {extensions} {onLinkClick} />
+        <div class="grow">
+          {#if extension}
+            <Extension {...extension} />
+          {/if}
+        </div>
+      </div>
+    </TabItem>
+    <TabItem
+      open={selectedTab === "build"}
+      title="Build Information"
+      onclick={() => selectTab("build")}
+    >
+      <BuildInfo {...diagnostics.buildInfo} />
+    </TabItem>
+    <TabItem
+      open={selectedTab === "server"}
+      title="Server Information"
+      onclick={() => selectTab("server")}
+    >
+      <ServerInfo {...diagnostics.serverInfo} />
+    </TabItem>
+  </Tabs>
+{/if}
