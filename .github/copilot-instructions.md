@@ -17,7 +17,6 @@ This project is a SvelteKit app (see `svelte.config.js`, `vite.config.ts`, and `
   - Place static assets (e.g., images, robots.txt) in `static/` (served at root URL).
   - Component-specific assets (e.g., icons) go in `src/lib/assets/`.
 
-
 ## Developer Workflows
 
 - **Install dependencies:**
@@ -36,7 +35,6 @@ This project is a SvelteKit app (see `svelte.config.js`, `vite.config.ts`, and `
 - **Sync SvelteKit config:**
   - `npm run prepare` (runs `svelte-kit sync`). Run this after changing dependencies or SvelteKit config files.
 
-
 ## Conventions & Tips
 
 - **TypeScript:**
@@ -51,7 +49,6 @@ This project is a SvelteKit app (see `svelte.config.js`, `vite.config.ts`, and `
 - **Adapters:**
   - The default adapter is `@sveltejs/adapter-auto`. For deployment, see SvelteKit docs.
 
-
 ## Key Files
 
 - `src/lib/components/` — Main UI components
@@ -60,7 +57,6 @@ This project is a SvelteKit app (see `svelte.config.js`, `vite.config.ts`, and `
 - `vite.config.ts`, `svelte.config.js` — Build and SvelteKit config
 - `package.json` — Scripts and dependencies
 - `static/` — Public static assets
-
 
 ## Example: Adding a New Component
 
