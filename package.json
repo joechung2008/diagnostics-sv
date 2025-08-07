@@ -51,5 +51,8 @@
     "@sveltejs/kit": {
       "cookie": "^0.7.0"
     }
+  },
+  "dependencies": {
+    "@tanstack/svelte-query": "^5.83.1"
   }
 }
