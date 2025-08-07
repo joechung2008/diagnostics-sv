@@ -3,7 +3,7 @@
   import Extension from "$lib/components/Extension.svelte";
   import Extensions from "$lib/components/Extensions.svelte";
   import ServerInfo from "$lib/components/ServerInfo.svelte";
-  import { isExtensionInfo } from "$lib/utils";
+  import { fetchDiagnostics, isExtensionInfo } from "$lib/utils";
   import { createQuery } from "@tanstack/svelte-query";
   import {
     DarkMode,
@@ -30,10 +30,7 @@
 
   const query = createQuery<Diagnostics>({
     queryKey: ["diagnostics"],
-    queryFn: async () => {
-      const response = await fetch(environment);
-      return response.json();
-    },
+    queryFn: () => fetchDiagnostics(environment),
     refetchOnWindowFocus: false,
   });
 
@@ -111,7 +108,12 @@
 {#if diagnostics}
   <Navbar>
     <NavUl>
-      <NavLi class="cursor-pointer">
+      <NavLi
+        class="cursor-pointer"
+        onclick={() => {
+          isOpen = !isOpen;
+        }}
+      >
         {environmentName}<ChevronDownOutline class="inline" />
       </NavLi>
       <Dropdown bind:isOpen simple>

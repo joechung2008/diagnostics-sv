@@ -2,11 +2,16 @@ export function byKey(a: KeyedNavLink, b: KeyedNavLink): number {
   return a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
 }
 
+export async function fetchDiagnostics(environment: string) {
+  const response = await fetch(environment);
+  return response.json();
+}
+
 export function isExtensionInfo(
   value: Extension | undefined
 ): value is ExtensionInfo {
   return (
-    value !== undefined && typeof value === "object" && "extensionName" in value
+    value !== null && typeof value === "object" && "extensionName" in value
   );
 }
 
