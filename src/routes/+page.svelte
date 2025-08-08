@@ -106,7 +106,7 @@
 </script>
 
 {#if diagnostics}
-  <Navbar>
+  <Navbar breakpoint="sm">
     <NavUl>
       <NavLi
         class="cursor-pointer"
@@ -148,9 +148,7 @@
         websites
       </NavLi>
     </NavUl>
-    <div class="md-order-2 flex">
-      <DarkMode />
-    </div>
+    <DarkMode />
   </Navbar>
   <Tabs>
     <TabItem
