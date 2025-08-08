@@ -10,7 +10,12 @@
 </script>
 
 <div class="root">
-  <Sidebar alwaysOpen aria-label="Extensions" position="static" class="w-auto">
+  <Sidebar
+    alwaysOpen
+    aria-label="Extensions"
+    position="static"
+    class="!z-0 w-auto"
+  >
     <SidebarGroup>
       {#each links as link (link.key)}
         <SidebarItem

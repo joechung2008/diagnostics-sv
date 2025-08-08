@@ -10,6 +10,7 @@
     Dropdown,
     DropdownItem,
     Navbar,
+    NavHamburger,
     NavLi,
     NavUl,
     TabItem,
@@ -148,7 +149,10 @@
         websites
       </NavLi>
     </NavUl>
-    <DarkMode />
+    <div class="flex">
+      <DarkMode />
+      <NavHamburger />
+    </div>
   </Navbar>
   <Tabs>
     <TabItem
