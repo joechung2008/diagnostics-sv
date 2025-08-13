@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025-08-13
+
+- Update project dependencies
+
 ## 2025-08-08
 
 - Add NavHamburger
