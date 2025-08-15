@@ -5,27 +5,6 @@ const PUBLIC = "https://hosting.portal.azure.net/api/diagnostics";
 const FAIRFAX = "https://hosting.azureportal.usgovcloudapi.net/api/diagnostics";
 const MOONCAKE = "https://hosting.azureportal.chinacloudapi.cn/api/diagnostics";
 
-type ExtensionInfo = {
-  extensionName: string;
-  config: Record<string, string> | undefined;
-  stageDefinition: Record<string, string[]> | undefined;
-};
-type ExtensionError = { lastError: { errorMessage: string; time: string } };
-type Extension = ExtensionInfo | ExtensionError;
-
-type Diagnostics = {
-  buildInfo: { buildVersion: string };
-  extensions: Record<string, Extension>;
-  serverInfo: {
-    deploymentId: string;
-    extensionSync: { totalSyncAllCount: number };
-    hostname: string;
-    nodeVersions: string;
-    serverId: string;
-    uptime: number;
-  };
-};
-
 const baseDiagnostics: Diagnostics = {
   buildInfo: { buildVersion: "1.0.0" },
   extensions: {

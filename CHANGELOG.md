@@ -1,5 +1,10 @@
 # Changelog
 
+## 2025-08-15
+
+- Update outdated packages
+- Remove redundant types from tests/routes/+page.spec.ts
+
 ## 2025-08-13
 
 - Update project dependencies
