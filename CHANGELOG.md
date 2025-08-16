@@ -3,6 +3,8 @@
 ## 2025-08-16
 
 - Move type definitions to app.d.ts
+- Fix type references changed by consolidation
+- Update Node.js version to 22
 
 ## 2025-08-15
 

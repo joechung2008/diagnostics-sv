@@ -21,7 +21,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [20.x]
+        node: [22.x]
 
     env:
       CI: true
