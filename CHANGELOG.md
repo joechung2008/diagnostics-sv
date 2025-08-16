@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025-08-16
+
+- Move type definitions to app.d.ts
+
 ## 2025-08-15
 
 - Update outdated packages

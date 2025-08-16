@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from "@testing-library/svelte";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+type Diagnostics = App.Diagnostics;
+
 const PUBLIC = "https://hosting.portal.azure.net/api/diagnostics";
 const FAIRFAX = "https://hosting.azureportal.usgovcloudapi.net/api/diagnostics";
 const MOONCAKE = "https://hosting.azureportal.chinacloudapi.cn/api/diagnostics";
