@@ -8,7 +8,7 @@
     TableHeadCell,
   } from "flowbite-svelte";
 
-  let { buildVersion }: BuildInfoProps = $props();
+  let { buildVersion }: App.BuildInfoProps = $props();
 
   const items = $derived.by(() => [
     { name: "Build Version", value: buildVersion },

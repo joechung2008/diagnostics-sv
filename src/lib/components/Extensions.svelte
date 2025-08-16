@@ -2,7 +2,7 @@
   import { byKey, isExtensionInfo, toNavLink } from "$lib/utils";
   import { Sidebar, SidebarGroup, SidebarItem } from "flowbite-svelte";
 
-  let { extensions, onLinkClick }: ExtensionsProps = $props();
+  let { extensions, onLinkClick }: App.ExtensionsProps = $props();
 
   const links = $derived.by(() =>
     Object.values(extensions).filter(isExtensionInfo).map(toNavLink).sort(byKey)

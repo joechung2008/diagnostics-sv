@@ -1,3 +1,7 @@
+type Extension = App.Extension;
+type ExtensionInfo = App.ExtensionInfo;
+type KeyedNavLink = App.KeyedNavLink;
+
 export function byKey(a: KeyedNavLink, b: KeyedNavLink): number {
   return a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
 }
@@ -21,8 +25,4 @@ export function toNavLink({ extensionName }: ExtensionInfo): KeyedNavLink {
     name: extensionName,
     url: "",
   };
-}
-
-export function when<T>(condition: boolean, ...args: T[]): T[] {
-  return condition ? args : [];
 }

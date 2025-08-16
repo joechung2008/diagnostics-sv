@@ -9,9 +9,9 @@
     TableBodyCell,
   } from "flowbite-svelte";
 
-  let { config }: ConfigurationProps = $props();
+  let { config }: App.ConfigurationProps = $props();
 
-  const items: KeyValuePair<string>[] = $derived.by(() =>
+  const items: App.KeyValuePair<string>[] = $derived.by(() =>
     Object.entries(config).map(([key, value]) => ({
       key,
       value,

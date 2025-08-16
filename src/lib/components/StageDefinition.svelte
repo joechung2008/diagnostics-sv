@@ -9,9 +9,9 @@
     TableHeadCell,
   } from "flowbite-svelte";
 
-  let { stageDefinition }: StageDefinitionProps = $props();
+  let { stageDefinition }: App.StageDefinitionProps = $props();
 
-  const items: KeyValuePair<string[]>[] = $derived.by(() =>
+  const items: App.KeyValuePair<string[]>[] = $derived.by(() =>
     Object.entries(stageDefinition).map(([key, value]) => ({
       key,
       value,

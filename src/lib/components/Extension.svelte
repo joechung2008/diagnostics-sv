@@ -3,7 +3,7 @@
   import Configuration from "./Configuration.svelte";
   import StageDefinition from "./StageDefinition.svelte";
 
-  let { config, extensionName, stageDefinition }: ExtensionProps = $props();
+  let { config, extensionName, stageDefinition }: App.ExtensionProps = $props();
 </script>
 
 <div class="root">

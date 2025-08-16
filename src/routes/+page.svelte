@@ -18,6 +18,10 @@
   } from "flowbite-svelte";
   import { ChevronDownOutline } from "flowbite-svelte-icons";
 
+  type Diagnostics = App.Diagnostics;
+  type ExtensionInfo = App.ExtensionInfo;
+  type KeyedNavLink = App.KeyedNavLink;
+
   enum Environment {
     Public = "https://hosting.portal.azure.net/api/diagnostics",
     Fairfax = "https://hosting.azureportal.usgovcloudapi.net/api/diagnostics",
@@ -163,7 +167,7 @@
       <div class="flex flex-row gap-4">
         <Extensions {extensions} {onLinkClick} />
         <div class="grow">
-          {#if extension}
+          {#if extension && isExtensionInfo(extension)}
             <Extension {...extension} />
           {/if}
         </div>

@@ -3,9 +3,11 @@ import {
   byKey,
   isExtensionInfo,
   toNavLink,
-  when,
   fetchDiagnostics,
 } from "../../src/lib/utils";
+
+type Extension = App.Extension;
+type ExtensionInfo = App.ExtensionInfo;
 
 describe("utils.ts", () => {
   it("byKey sorts by key ascending", () => {
@@ -48,11 +50,6 @@ describe("utils.ts", () => {
     expect(link).toEqual({ key: "ext", name: "ext", url: "" });
   });
 
-  it("when returns args if condition is true, otherwise empty array", () => {
-    expect(when(true, 1, 2, 3)).toEqual([1, 2, 3]);
-    expect(when(false, 1, 2, 3)).toEqual([]);
-  });
-
   it("byKey returns 0 for equal keys", () => {
     const x = { key: "a", name: "X", url: "" };
     const y = { key: "a", name: "Y", url: "" };
@@ -76,19 +73,6 @@ describe("utils.ts", () => {
     };
     const link = toNavLink(info);
     expect(link).toEqual({ key: "ext", name: "ext", url: "" });
-  });
-
-  it("when with no args returns empty array regardless of condition", () => {
-    expect(when(true)).toEqual([]);
-    expect(when(false)).toEqual([]);
-  });
-
-  it("when preserves reference identity of arguments", () => {
-    const obj1 = { a: 1 };
-    const obj2 = { a: 2 };
-    const result = when(true, obj1, obj2);
-    expect(result[0]).toBe(obj1);
-    expect(result[1]).toBe(obj2);
   });
 
   it("fetchDiagnostics returns parsed JSON from fetch", async () => {

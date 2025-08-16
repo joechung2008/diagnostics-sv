@@ -15,7 +15,7 @@
     nodeVersions,
     serverId,
     uptime,
-  }: ServerInfoProps = $props();
+  }: App.ServerInfoProps = $props();
 
   const items = $derived.by(() => [
     { name: "Hostname", value: hostname },
