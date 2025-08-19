@@ -11,7 +11,6 @@ export default defineConfig(({ mode }) => ({
       exclude: ["src/**/*.d.ts"],
       include: ["src/**/*.{svelte,ts}"],
     },
-    css: true,
     environment: "jsdom",
     globals: true,
     setupFiles: [resolve(__dirname, "tests/setup.ts")],
