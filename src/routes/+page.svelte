@@ -113,13 +113,16 @@
 {#if diagnostics}
   <Navbar breakpoint="sm">
     <NavUl>
-      <NavLi
-        class="cursor-pointer"
-        onclick={() => {
-          isOpen = !isOpen;
-        }}
-      >
-        {environmentName}<ChevronDownOutline class="inline" />
+      <NavLi>
+        <button
+          type="button"
+          class="w-full cursor-pointer text-left"
+          onclick={() => {
+            isOpen = !isOpen;
+          }}
+        >
+          {environmentName}<ChevronDownOutline class="inline" />
+        </button>
       </NavLi>
       <Dropdown bind:isOpen simple>
         {#each environments as env (env.key)}
@@ -129,28 +132,34 @@
         {/each}
       </Dropdown>
       {#if showPaasServerless}
-        <NavLi
-          class="cursor-pointer"
+        <NavLi>
+          <button
+            type="button"
+            class="w-full cursor-pointer text-left"
+            onclick={() => {
+              const paasserverless = extensions["paasserverless"];
+              if (isExtensionInfo(paasserverless)) {
+                extension = paasserverless;
+              }
+            }}
+          >
+            paasserverless
+          </button>
+        </NavLi>
+      {/if}
+      <NavLi>
+        <button
+          type="button"
+          class="w-full cursor-pointer text-left"
           onclick={() => {
-            const paasserverless = extensions["paasserverless"];
-            if (isExtensionInfo(paasserverless)) {
-              extension = paasserverless;
+            const websites = extensions["websites"];
+            if (isExtensionInfo(websites)) {
+              extension = websites;
             }
           }}
         >
-          paasserverless
-        </NavLi>
-      {/if}
-      <NavLi
-        class="cursor-pointer"
-        onclick={() => {
-          const websites = extensions["websites"];
-          if (isExtensionInfo(websites)) {
-            extension = websites;
-          }
-        }}
-      >
-        websites
+          websites
+        </button>
       </NavLi>
     </NavUl>
     <div class="flex">

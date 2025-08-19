@@ -1,5 +1,9 @@
 # Changelog
 
+## 2025-08-19
+
+- Work around flowbite-svelte NavLi onclick bug
+
 ## 2025-08-16
 
 - Move type definitions to app.d.ts
