@@ -24,3 +24,7 @@ vite.config.ts.timestamp-*
 
 # Test
 coverage/
+
+# IDEs
+.vscode
+!.vscode/extensions.json
