@@ -6,7 +6,7 @@
   let { config, extensionName, stageDefinition }: App.ExtensionProps = $props();
 </script>
 
-<div class="root">
+<div class="flex flex-grow flex-col gap-0.5 overflow-y-auto p-1">
   <Heading tag="h1">
     {extensionName}
   </Heading>

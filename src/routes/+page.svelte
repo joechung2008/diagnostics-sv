@@ -111,90 +111,87 @@
 </script>
 
 {#if diagnostics}
-  <Navbar breakpoint="sm">
-    <NavUl>
-      <NavLi>
-        <button
-          type="button"
-          class="w-full cursor-pointer text-left"
-          onclick={() => {
-            isOpen = !isOpen;
-          }}
-        >
-          {environmentName}<ChevronDownOutline class="inline" />
-        </button>
-      </NavLi>
-      <Dropdown bind:isOpen simple>
-        {#each environments as env (env.key)}
-          <DropdownItem onclick={env.onClick}>
-            {env.text}
-          </DropdownItem>
-        {/each}
-      </Dropdown>
-      {#if showPaasServerless}
+  <div class="flex h-full flex-col">
+    <Navbar breakpoint="sm" class="py-0 sm:py-0">
+      <NavUl>
         <NavLi>
           <button
             type="button"
             class="w-full cursor-pointer text-left"
             onclick={() => {
-              const paasserverless = extensions["paasserverless"];
-              if (isExtensionInfo(paasserverless)) {
-                extension = paasserverless;
+              isOpen = !isOpen;
+            }}
+          >
+            {environmentName}<ChevronDownOutline class="inline" />
+          </button>
+        </NavLi>
+        <Dropdown bind:isOpen simple>
+          {#each environments as env (env.key)}
+            <DropdownItem onclick={env.onClick}>
+              {env.text}
+            </DropdownItem>
+          {/each}
+        </Dropdown>
+        {#if showPaasServerless}
+          <NavLi>
+            <button
+              type="button"
+              class="w-full cursor-pointer text-left"
+              onclick={() => {
+                const paasserverless = extensions["paasserverless"];
+                if (isExtensionInfo(paasserverless)) {
+                  extension = paasserverless;
+                }
+              }}
+            >
+              paasserverless
+            </button>
+          </NavLi>
+        {/if}
+        <NavLi>
+          <button
+            type="button"
+            class="w-full cursor-pointer text-left"
+            onclick={() => {
+              const websites = extensions["websites"];
+              if (isExtensionInfo(websites)) {
+                extension = websites;
               }
             }}
           >
-            paasserverless
+            websites
           </button>
         </NavLi>
-      {/if}
-      <NavLi>
-        <button
-          type="button"
-          class="w-full cursor-pointer text-left"
-          onclick={() => {
-            const websites = extensions["websites"];
-            if (isExtensionInfo(websites)) {
-              extension = websites;
-            }
-          }}
-        >
-          websites
-        </button>
-      </NavLi>
-    </NavUl>
-    <div class="flex">
-      <DarkMode />
-      <NavHamburger />
-    </div>
-  </Navbar>
-  <Tabs>
-    <TabItem
-      open={selectedTab === "extensions"}
-      title="Extensions"
-      onclick={() => selectTab("extensions")}
-    >
-      <div class="flex flex-row gap-4">
-        <Extensions {extensions} {onLinkClick} />
-        <div class="grow">
+      </NavUl>
+      <div class="flex">
+        <DarkMode />
+        <NavHamburger />
+      </div>
+    </Navbar>
+    <Tabs tabStyle="underline" class="pb-4">
+      <TabItem title="Extensions" onclick={() => selectTab("extensions")} />
+      <TabItem title="Build Information" onclick={() => selectTab("build")} />
+      <TabItem title="Server Information" onclick={() => selectTab("server")} />
+    </Tabs>
+    {#if selectedTab === "extensions"}
+      <div class="box-border flex overflow-y-auto">
+        <div class="flex size-full flex-row gap-1">
+          <Extensions {extensions} {onLinkClick} />
           {#if extension && isExtensionInfo(extension)}
             <Extension {...extension} />
           {/if}
         </div>
       </div>
-    </TabItem>
-    <TabItem
-      open={selectedTab === "build"}
-      title="Build Information"
-      onclick={() => selectTab("build")}
-    >
-      <BuildInfo {...diagnostics.buildInfo} />
-    </TabItem>
-    <TabItem
-      open={selectedTab === "server"}
-      title="Server Information"
-      onclick={() => selectTab("server")}
-    >
-      <ServerInfo {...diagnostics.serverInfo} />
-    </TabItem>
-  </Tabs>
+    {/if}
+    {#if selectedTab === "build" && diagnostics.buildInfo}
+      <div class="box-border flex overflow-y-auto">
+        <BuildInfo {...diagnostics.buildInfo} />
+      </div>
+    {/if}
+    {#if selectedTab === "server" && diagnostics.serverInfo}
+      <div class="box-border flex overflow-y-auto">
+        <ServerInfo {...diagnostics.serverInfo} />
+      </div>
+    {/if}
+  </div>
 {/if}

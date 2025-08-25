@@ -44,10 +44,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.root {
-  max-height: calc(100vh - 196px);
-  overflow: hidden auto;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+/* We're only using tabs from Flowbite, so hide tab panels */
+[role="tabpanel"] {
+  display: none;
 }

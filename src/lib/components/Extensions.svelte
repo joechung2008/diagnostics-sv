@@ -9,7 +9,7 @@
   );
 </script>
 
-<div class="root">
+<div class="flex flex-none flex-col gap-0.5 overflow-y-auto p-1">
   <Sidebar
     alwaysOpen
     aria-label="Extensions"
@@ -22,6 +22,7 @@
           label={link.name}
           onclick={() => onLinkClick?.(link)}
           class="cursor-pointer"
+          tabindex={0}
         />
       {/each}
     </SidebarGroup>
