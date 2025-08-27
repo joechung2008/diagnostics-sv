@@ -10,6 +10,9 @@ const gitignorePath = fileURLToPath(new URL("./.gitignore", import.meta.url));
 
 export default ts.config(
   includeIgnoreFile(gitignorePath),
+  {
+    ignores: ["**/*.config.{js,ts}"],
+  },
   ...ts.configs.recommended,
   ...svelte.configs.recommended,
   prettier,
